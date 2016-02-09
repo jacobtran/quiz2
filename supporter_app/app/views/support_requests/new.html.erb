@@ -1,0 +1,32 @@
+<h1>Add Support Request</h1>
+<%= @support_request.errors.full_messages.join(", ") %>
+<%# if @question is persisted then the form will send PATCH request by adding
+a hidden field with name _method and value 'patch'. The action url will be
+question_path(@question) (by convention) %>
+<%= form_for @support_request do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </div>
+  <div>
+    <%= f.label :department %>
+    <%= f.radio_button :department, 'sales' %>
+    <%= f.label :department_sales, 'sales' %>
+    <%= f.radio_button :department, 'marketing' %>
+    <%= f.label :department_marketing, 'marketing' %>
+    <%= f.radio_button :department, 'technical' %>
+    <%= f.label :department_technical, 'technical' %>
+  </div>
+  <div>
+    <%= f.label :message %>
+    <%= f.text_area :message %>
+  </div>
+  <div>
+    <%= f.submit %>
+    <!-- if you want a custom label    <%= f.submit "Hello" %> -->
+  </div>
+<% end %>

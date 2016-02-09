@@ -1,0 +1,21 @@
+<h1><%= @support_request.name %></h1>
+
+<p><%= @support_request.email %></p>
+
+<p><%= @support_request.department %></p>
+
+<p><%= @support_request.message %></p>
+
+<p>Done? <%= @support_request.done %></p>
+
+<p><%= @support_request.created_at %></p>
+
+<p><%= link_to "Edit", edit_support_request_path(@support_request) %></p>
+<%# method: :delete asks rails to send a delete request instead of get wich is
+accomplished using Javascript/jQuery %>
+<p><%= link_to "Delete",
+              support_request_path(@support_request),
+              method: :delete,
+              data: {confirm: "Are you sure?"} %></p>
+
+<p><%= link_to "Show All", root_path(@support_request) %></p>

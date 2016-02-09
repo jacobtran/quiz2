@@ -1,0 +1,86 @@
+<h1>Support Requests (<%= @support_requests.length %>)</h1>
+<div>
+  <%= form_tag(support_requests_path, :method => "get", id: "search-form") do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Search support requests" %>
+  <%= submit_tag "Search" %>
+  <% end %>
+  <%#= form_tag(support_requests_path, :method => "get", id: "done-form") do %>
+  <%#= text_field_tag :done, params[:done], placeholder: "Done support requests" %>
+  <%#= submit_tag "Not Done" %>
+  <%# end %>
+
+</div>
+<div>
+  <table border=1>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Department</th>
+      <th>Message</th>
+      <th>Action</th>
+    </tr>
+
+<% @support_requests.each do |support_request| %>
+<tr>
+  <td><%= link_to support_request.name, edit_support_request_path(support_request) %></td>
+  <td><%= support_request.email %></td>
+  <td><%= support_request.department %></td>
+  <td><%= support_request.message %></td>
+  <td>
+    <%= button_to "Edit",
+          edit_support_request_path(support_request),
+          method: :get
+    %>
+
+    <%= button_to "Delete",
+          support_request_path(support_request),
+          method: :delete,
+          data: {confirm: "Are you sure?"}
+
+    %>
+
+
+<%#= button_to "Not Done", support_request_path(support_request), :method => :get %>
+<%#= form_tag(support_requests_path, :method => "get", id: "done-form") do %>
+<%#= text_field_tag :done, params[:done] %>
+<%#= submit_tag "Not Done" %>
+<%# end %>
+
+    <%= if support_request.done
+          button_to "Not Done",
+            support_request_path(support_request),
+            method: :put
+        else
+          button_to 'Done',
+          support_request_path(support_request),
+          :method => :put
+        end
+
+    %>
+
+    <%#=  p "support_request.done"
+        p support_request.done
+        if support_request.done
+          button_to "Done", edit_support_request_path(support_request)
+        else
+          # form_tag(support_requests_path, :method => "get", id: "status-form") do
+          #   text_field_tag :status, params[:status], placeholder: "Search support requests"
+          #   submit_tag "Not Done"
+          # end
+          form_tag(support_requests_path, :method => "get", id: "done-form") do
+
+            hidden_field_tag 'done', true
+hidden_field_tag 'id', support_request.id
+            submit_tag "Not Done"
+          end
+          # button_to "Not Done", edit_support_request_path(support_request)
+        end
+    %>
+  </td>
+</tr>
+<% end %>
+</table>
+<div style="">
+  <%= paginate @support_requests %>
+</div>
+</div>

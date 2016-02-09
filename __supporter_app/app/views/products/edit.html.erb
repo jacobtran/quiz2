@@ -1,0 +1,23 @@
+<h1>Edit Product</h1>
+<%= @product.errors.full_messages.join(", ") %>
+<%# if @question is persisted then the form will send PATCH request by adding
+a hidden field with name _method and value 'patch'. The action url will be
+question_path(@question) (by convention) %>
+<%= form_for @product do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+  <div>
+    <%= f.label :price %>
+    <%= f.text_field :price %>
+  </div>
+  <div>
+    <%= f.submit %>
+    <!-- if you want a custom label    <%= f.submit "Hello" %> -->
+  </div>
+<% end %>
